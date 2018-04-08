@@ -1,4 +1,6 @@
 <?php
+	session_start();
+	header("Content-Type: text/html");
 	if ($_POST['submit'] != 'OK')
 		echo "ERROR\n";
 	else {
@@ -19,9 +21,16 @@
 			echo "Wrong pass\n";
 		}
 		else
+		{
+			$_SESSION['login'] = $array['login'];
+			$_SESSION['role'] = $array['flag'];
+			$_SESSION['logged_in'] = 1;
+			header("Location: ../../front_end/menu.html");
+			exit(1);
 			echo "you Log In\n";
+		}
 	}
-	else {
+	else{
 		echo "No User\n";
 	}
 	mysqli_close($conn);

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,10 +27,22 @@
 </nav>
 <div id="box"><img title="box" id="cartInfo" src="https://magazin-pixel.ru/themes/pxl/images/cart-big.png">
 </div>
+<?php
+if ($_SESSION['logged_in'] == 0)
+{
+?>
 <div id="log">
-	<p>Login / Register</p>
+	<form action="log_front/log_in_h.html" method="post">
+	<input class='but' type="submit" name="submit" value="Login"/></form>
+	<form action="log_front/create.html" method="post">
+	<input class='but' type="submit" name="submit" value="Register"/></form>
 </div>
+<?php
+}
+?>
 </header>
-</div>
 </body>
 </html>
+<?php
+print_r($_SESSION);
+?>

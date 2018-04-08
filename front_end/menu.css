@@ -126,3 +126,11 @@ a:hover
 	margin: 10px;
 	margin-right: 50px;
 }
+
+#log {
+  position: absolute;
+  right: 15%;
+  top : 40px;
+  height: 50px;
+  margin: 10px;
+}

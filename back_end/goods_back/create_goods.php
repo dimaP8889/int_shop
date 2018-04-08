@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	if ($_POST['submit'] != 'OK')
 		echo "ERROR\n";
 	else {
