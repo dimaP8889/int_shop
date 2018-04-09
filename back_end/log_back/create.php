@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	if ($_POST['submit'] != 'OK')
 		echo "ERROR\n";
 	else {
@@ -23,10 +24,14 @@
 		$sql = "INSERT INTO people (login, pw)
 		VALUES ('$name', '$passwd')";
 		$result = mysqli_query($conn, $sql);
-		echo "Now you can log in";
+		$_SESSION['register'] = 1;
+		header("Location: ../../front_end/log_front/log_in_h.php");
+		exit;
 	}
 	else { 
-		echo "User is already exist";
+		$_SESSION['register'] = 2;
+		header("Location: ../../front_end/log_front/create.php");
+		exit;
 	}
 	mysqli_close($conn);
 	}

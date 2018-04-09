@@ -16,10 +16,10 @@
 		WHERE name = '$name' and category = '$category'";
 		echo mysqli_error($conn);
 		$result = mysqli_query($conn, $sql);
-		echo "good deleted";
+		header("Location: ../../front_end/index.php");
 	}
 	else {
-		echo "wrong good";
+		header("Location: ../../front_end/goods_front/del_goods.php");
 	}
 	mysqli_close($conn);
 	}

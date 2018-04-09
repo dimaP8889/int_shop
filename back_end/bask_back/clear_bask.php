@@ -1,11 +1,10 @@
 <?php
-	if ($_POST['submit'] != 'OK')
-		echo "ERROR\n";
-	else {
-	$sql = "DELETE TABLE IF EXISTS bask";
+	$conn = mysqli_connect("localhost", "root", "p0grebn", "site");
+	if (!$conn)
+		echo "No connection\n";
+	$sql = "TRUNCATE TABLE bask";
 	$result = mysqli_query($conn, $sql);
-	echo "bask";
 	echo mysqli_error($conn);
 	mysqli_close($conn);
-	}
+	header("Location: ../../front_end/index.php");
 ?>

@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	header("Content-Type: text/html");
 	if ($_POST['submit'] != 'OK')
 		echo "ERROR\n";
 	else {
@@ -14,24 +13,31 @@
 	echo mysqli_error($conn);
 	$array = mysqli_fetch_array($result);
 	if ($array) {
-		$sql = "SELECT * FROM people WHERE pw='$passwd'";
-		$result = mysqli_query($conn, $sql);
-		$array = mysqli_fetch_array($result);
-		if(!$array) {
-			echo "Wrong pass\n";
+		$sql1 = "SELECT * FROM people WHERE pw='$passwd'";
+		$result1 = mysqli_query($conn, $sql1);
+		$array1 = mysqli_fetch_array($result1);
+		if(!$array1) {
+			$_SESSION['wrong_pass'] = 1;
+			header("Location: ../../front_end/log_front/log_in_h.php");
+			exit;
 		}
 		else
 		{
+			$_SESSION['wrong_pass'] = 0;
 			$_SESSION['login'] = $array['login'];
 			$_SESSION['role'] = $array['flag'];
 			$_SESSION['logged_in'] = 1;
-			header("Location: ../../front_end/menu.html");
-			exit(1);
-			echo "you Log In\n";
+			if ($_SESSION['login'] == "dima")
+				$_SESSION['admin'] = 1;
+			
+			header("Location: ../../front_end/index.php");
+			exit;
 		}
 	}
 	else{
-		echo "No User\n";
+		$_SESSION['wrong_pass'] = 2;
+		header("Location: ../../front_end/log_front/log_in_h.php");
+		exit;
 	}
 	mysqli_close($conn);
 	}

@@ -1,7 +1,4 @@
 <?php
-if ($_POST['submit'] != 'OK')
-		echo "ERROR\n";
-	else {
 	$conn = mysqli_connect("localhost", "root", "p0grebn", "site");
 	if (!$conn)
 		echo "No connection\n";
@@ -15,8 +12,8 @@ if ($_POST['submit'] != 'OK')
 	if (!mysqli_query($conn, $sql)) {
 	echo "Error creating table: " . mysqli_error($conn);
 	}
-	$name = $_POST['name'];
-	$category = $_POST['category'];
+	$name = $_GET['name'];
+	$category = $_GET['cat'];
 	$sql = "SELECT * FROM goods WHERE name='$name' and category='$category'";
 	$result = mysqli_query($conn, $sql);
 	echo mysqli_error($conn);
@@ -36,7 +33,7 @@ if ($_POST['submit'] != 'OK')
 			VALUES ('$name', '$category', '$quan', '$price')";
 			$result = mysqli_query($conn, $sql);
 			echo mysqli_error($conn);
-			echo "Succesfully add\n";
+			header("Location: ../../front_end/index.php");
 		}
 		else {
 			$sql = "SELECT * FROM bask WHERE name='$name' and category='$category'";
@@ -46,9 +43,8 @@ if ($_POST['submit'] != 'OK')
 			$sql = "UPDATE bask SET quan='$quan'
 			WHERE name='$name' and category='$category'";
 			$result = mysqli_query($conn, $sql);
-			echo "add +1\n";
+			header("Location: ../../front_end/index.php");
 		}
 	}
 	mysqli_close($conn);
-	}
 ?>
